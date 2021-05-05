@@ -11,6 +11,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 @Mod("heroes_compactor_mod")
 public class CompactorMod {
 	
+	public static final String MOD_ID = "heroes_compactor_mod";
+	
     public static final Logger LOGGER = LogManager.getLogger();
 
     public CompactorMod() {
