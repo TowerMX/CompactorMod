@@ -21,4 +21,4 @@ public class CompactorMod {
     private void setup(final FMLCommonSetupEvent event) {
     }
 
-} //hola jaja
+}
