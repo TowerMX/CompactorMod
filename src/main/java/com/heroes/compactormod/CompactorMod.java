@@ -30,4 +30,5 @@ public class CompactorMod {
 //	  Ahora pruebo yo a ver si sube esto
 //    Otra linea nueva por favor dejame subirlo dale carla aunque sea medio bit de codigo
 //    olam e dej as¿
+//    Así es amigos, ya funciona :')
 }
