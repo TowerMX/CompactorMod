@@ -23,12 +23,5 @@ public class CompactorMod {
     private void setup(final FMLCommonSetupEvent event) {
     }
 
-//    Comentario añadido por Nelio para ver si está bien linkado el repositorio 8)
-//    Second test
-//    Third test
-    
-//	  Ahora pruebo yo a ver si sube esto
-//    Otra linea nueva por favor dejame subirlo dale carla aunque sea medio bit de codigo
-//    olam e dej as¿
-//    Así es amigos, ya funciona :')
+//    Más limpito
 }
