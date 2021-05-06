@@ -13,6 +13,7 @@ public class ItemInit {
 	
 	public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CompactorMod.MOD_ID);
 	
-	public static final RegistryObject<BlockItem> COMPACTOR = ITEMS.register("compactor", () -> new BlockItem(BlockInit.COMPACTOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
-	
+	public static final RegistryObject<BlockItem> COMPACTOR = ITEMS.register("compactor",
+			() -> new BlockItem(BlockInit.COMPACTOR.get(), new Item.Properties().tab(ItemGroup.TAB_REDSTONE)));
+
 }

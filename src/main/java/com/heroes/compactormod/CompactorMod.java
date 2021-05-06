@@ -30,7 +30,7 @@ public class CompactorMod {
     	
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-    }
+	private void setup(final FMLCommonSetupEvent event) {
+	}
 
 }

@@ -15,14 +15,12 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockInit {
 
-	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CompactorMod.MOD_ID);
-	
+	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
+			CompactorMod.MOD_ID);
+
 	public static final RegistryObject<Block> COMPACTOR = BLOCKS.register("compactor",
-			() -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK)
-					.strength(3.5f, 3.5f)
-					.sound(SoundType.STONE)
-					.harvestTool(ToolType.PICKAXE)
-					.harvestLevel(0)
+			() -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(3.5f, 3.5f)
+					.sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(0)
 					.requiresCorrectToolForDrops()));
-	
+
 }
