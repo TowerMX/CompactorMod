@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"particle": "compactormod:block/compactor_front",
+		"north": "compactormod:block/compactor_front",
+    	"south": "compactormod:block/compactor_side",
+    	"east": "compactormod:block/compactor_side",
+    	"west": "compactormod:block/compactor_front",
+    	"up": "compactormod:block/compactor_top",
+    	"down": "compactormod:block/compactor_bottom"
+	}
+}
