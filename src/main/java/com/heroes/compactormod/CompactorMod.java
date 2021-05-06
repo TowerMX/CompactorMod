@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.heroes.compactormod.core.init.BlockInit;
+import com.heroes.compactormod.core.init.ItemInit;
 
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -24,6 +25,7 @@ public class CompactorMod {
     	bus.addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
     	
+        ItemInit.ITEMS.register(bus);
     	BlockInit.BLOCKS.register(bus);
     	
     }
