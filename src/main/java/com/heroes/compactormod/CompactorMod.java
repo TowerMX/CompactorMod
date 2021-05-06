@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod("heroes_compactor_mod")
+@Mod(CompactorMod.MOD_ID)
 public class CompactorMod {
 	
 	public static final String MOD_ID = "heroes_compactor_mod";
