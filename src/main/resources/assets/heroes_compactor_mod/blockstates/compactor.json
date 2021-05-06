@@ -1,0 +1,5 @@
+{
+	"variants": {
+		"": { "model": "heroes_compactor_mod:block/compactor" }
+	}
+}

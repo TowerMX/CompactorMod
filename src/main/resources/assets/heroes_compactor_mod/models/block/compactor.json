@@ -1,0 +1,12 @@
+{
+	"parent": "minecraft:block/cube",
+	"textures": {
+		"particle": "heroes_compactor_mod:blocks/compactor_front",
+		"north": "heroes_compactor_mod:blocks/compactor_front",
+    	"south": "heroes_compactor_mod:blocks/compactor_side",
+    	"east": "heroes_compactor_mod:blocks/compactor_side",
+    	"west": "heroes_compactor_mod:blocks/compactor_front",
+    	"up": "heroes_compactor_mod:blocks/compactor_top",
+    	"down": "heroes_compactor_mod:blocks/compactor_bottom"
+	}
+}
