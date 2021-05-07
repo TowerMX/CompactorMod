@@ -8,11 +8,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class CompactorEntity extends TileEntity implements ITickableTileEntity{
 
-	private static int TICKS = 8; // Cantidad de ticks a los que mirar el inventario
+	private static int TICKS = 100; // Cantidad de ticks a los que mirar el inventario
 	private int tickCounter = 1; // Contador de ticks
 	
-	public CompactorEntity(TileEntityType<?> p_i48289_1_) {
-		super(p_i48289_1_);
+	public CompactorEntity(TileEntityType<?> entityTipe) {
+		super(entityTipe);
 		// TODO Auto-generated constructor stub
 	}
 
