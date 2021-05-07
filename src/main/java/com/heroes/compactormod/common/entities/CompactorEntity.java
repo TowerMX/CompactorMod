@@ -1,4 +1,4 @@
-package com.heroes.compactormod.core.init;
+package com.heroes.compactormod.common.entities;
 
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -8,7 +8,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 public class CompactorEntity extends TileEntity implements ITickableTileEntity{
 
-	private static int TICKS = 100; // Cantidad de ticks a los que mirar el inventario
+	private static int TICKS = 8; // Cantidad de ticks a los que mirar el inventario
 	private int tickCounter = 1; // Contador de ticks
 	
 	public CompactorEntity(TileEntityType<?> p_i48289_1_) {
@@ -18,20 +18,11 @@ public class CompactorEntity extends TileEntity implements ITickableTileEntity{
 
 	@Override
 	public void tick() {
-		if(this.tickCounter++==CompactorEntity.TICKS) {
-			System.out.println("tick n: " + (this.tickCounter - 1));
+		if(tickCounter++==CompactorEntity.TICKS) {
 			
-			tickCounter = 1;
 		}
 		
 	}
-	
-//	@Override
-//	public void update() {
-//
-//
-//	    // TODO: Consume entities.
-//	}
 
 //	Dónde se suscribe? Creo que en CompactorMod, pero no estoy seguro.
 //	
