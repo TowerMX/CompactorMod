@@ -47,6 +47,4 @@ public class CompactorBlock extends Block implements IForgeBlock {
 		return super.use(p_225533_1_, p_225533_2_, p_225533_3_, p_225533_4_, p_225533_5_, p_225533_6_);
 	}
 	
-	FurnaceScreen
-	
 }
