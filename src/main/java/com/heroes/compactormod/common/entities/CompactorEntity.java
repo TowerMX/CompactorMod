@@ -1,4 +1,4 @@
-package com.heroes.compactormod.core.init;
+package com.heroes.compactormod.common.entities;
 
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.TileEntity;
