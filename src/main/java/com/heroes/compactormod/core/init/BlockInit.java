@@ -1,6 +1,7 @@
 package com.heroes.compactormod.core.init;
 
 import com.heroes.compactormod.CompactorMod;
+import com.heroes.compactormod.client.util.CompactorBlock;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
@@ -19,8 +20,10 @@ public class BlockInit {
 			CompactorMod.MOD_ID);
 
 	public static final RegistryObject<Block> COMPACTOR = BLOCKS.register("compactor",
-			() -> new Block(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(3.5f, 3.5f)
+			() -> new CompactorBlock(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(3.5f, 3.5f)
 					.sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(0)
 					.requiresCorrectToolForDrops()));
 
+	
+	
 }
