@@ -8,7 +8,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockReader;
 import net.minecraftforge.common.extensions.IForgeBlock;
 
-public class CompactorBlock extends Block implements IForgeBlock {
+public class CompactorBlock extends Block /*implements IForgeBlock*/ {
 
 
 	public CompactorBlock(Properties p_i48440_1_) {
@@ -17,16 +17,16 @@ public class CompactorBlock extends Block implements IForgeBlock {
 //		ni idea de qué se hace aquí
 	}
 
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
-
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		// TODO Auto-generated method stub
-		return new CompactorEntity(/*equisde*/);
-	}
+//	@Override
+//	public boolean hasTileEntity(BlockState state) {
+//		return true;
+//	}
+//
+//	@Override
+//	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+//		// TODO Auto-generated method stub
+//		return new CompactorEntity(/*equisde*/);
+//	}
 
 
 }
