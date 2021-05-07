@@ -36,4 +36,3 @@ public class CompactorMod {
 	}
 
 }
-//Por favor dejame subirlo ya
