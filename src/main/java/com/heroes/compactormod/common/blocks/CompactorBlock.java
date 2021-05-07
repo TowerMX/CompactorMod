@@ -17,8 +17,7 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.extensions.IForgeBlock;
 
-public class CompactorBlock extends Block /*implements IForgeBlock*/ {
-
+public class CompactorBlock extends Block /* implements IForgeBlock */ {
 
 	public CompactorBlock(Properties properties) {
 		super(properties);
@@ -34,10 +33,11 @@ public class CompactorBlock extends Block /*implements IForgeBlock*/ {
 //		// TODO Auto-generated method stub
 //		return new CompactorEntity(/*equisde*/);
 //	}
-	
+
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-		
+	public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player,
+			Hand handIn, BlockRayTraceResult hit) {
+
 	}
 
 	@Override
@@ -46,5 +46,5 @@ public class CompactorBlock extends Block /*implements IForgeBlock*/ {
 		// TODO Auto-generated method stub
 		return super.use(p_225533_1_, p_225533_2_, p_225533_3_, p_225533_4_, p_225533_5_, p_225533_6_);
 	}
-	
+
 }

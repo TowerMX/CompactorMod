@@ -12,13 +12,13 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class CompactorGui extends AbstractRecipeBookGui {
-   /*private static final ITextComponent FILTER_NAME = new TranslationTextComponent("gui.recipebook.toggleRecipes.smeltable");
-
-   protected ITextComponent getRecipeFilterName() {
-      return FILTER_NAME;
-   }
-
-   protected Set<Item> getFuelItems() {
-      return AbstractFurnaceTileEntity.getFuel().keySet();
-   }*/
+	/*
+	 * private static final ITextComponent FILTER_NAME = new
+	 * TranslationTextComponent("gui.recipebook.toggleRecipes.smeltable");
+	 * 
+	 * protected ITextComponent getRecipeFilterName() { return FILTER_NAME; }
+	 * 
+	 * protected Set<Item> getFuelItems() { return
+	 * AbstractFurnaceTileEntity.getFuel().keySet(); }
+	 */
 }

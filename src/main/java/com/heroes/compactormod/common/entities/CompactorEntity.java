@@ -6,11 +6,11 @@ import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-public class CompactorEntity extends TileEntity implements ITickableTileEntity{
+public class CompactorEntity extends TileEntity implements ITickableTileEntity {
 
 	private static int TICKS = 100; // Cantidad de ticks a los que mirar el inventario
 	private int tickCounter = 1; // Contador de ticks
-	
+
 	public CompactorEntity(TileEntityType<?> entityTipe) {
 		super(entityTipe);
 		// TODO Auto-generated constructor stub
@@ -18,10 +18,10 @@ public class CompactorEntity extends TileEntity implements ITickableTileEntity{
 
 	@Override
 	public void tick() {
-		if(tickCounter++==CompactorEntity.TICKS) {
-			
+		if (tickCounter++ == CompactorEntity.TICKS) {
+
 		}
-		
+
 	}
 
 //	Dónde se suscribe? Creo que en CompactorMod, pero no estoy seguro.
@@ -32,5 +32,5 @@ public class CompactorEntity extends TileEntity implements ITickableTileEntity{
 //	  type.setRegistryName("mymod", "myte");
 //	  evt.getRegistry().register(type);
 //	}
-	
+
 }
