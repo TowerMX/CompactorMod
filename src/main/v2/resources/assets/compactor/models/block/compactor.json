@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "compactor:blocks/down",
+    "up": "compactor:blocks/caution_side",
+    "north": "compactor:blocks/caution_top",
+    "east": "compactor:blocks/caution_top",
+    "south": "compactor:blocks/caution_top",
+    "west": "compactor:blocks/caution_top",
+    "particle": "compactor:blocks/down"
+  }
+}
