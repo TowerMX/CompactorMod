@@ -19,7 +19,5 @@ public class BlockInit {
 			CompactorMod.MOD_ID);
 
 	public static final RegistryObject<CompactorBlock> COMPACTOR = BLOCKS.register("compactor",
-			() -> new CompactorBlock(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(3.5f, 3.5f)
-					.sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(0)
-					.requiresCorrectToolForDrops()));
+			() -> new CompactorBlock());
 }
