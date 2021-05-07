@@ -1,0 +1,39 @@
+{
+  "group": "compactor",
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "012",
+    "3 5",
+    "678"
+  ],
+  "key": {
+    "0": {
+      "tag": "forge:stone"
+    },
+    "1": {
+      "tag": "forge:stone"
+    },
+    "2": {
+      "tag": "forge:stone"
+    },
+    "3": {
+      "item": "minecraft:piston"
+    },
+    "5": {
+      "item": "minecraft:piston"
+    },
+    "6": {
+      "tag": "forge:stone"
+    },
+    "7": {
+      "tag": "forge:stone"
+    },
+    "8": {
+      "tag": "forge:stone"
+    }
+  },
+  "result": {
+    "item": "compactor:compactor",
+    "count": 1
+  }
+}

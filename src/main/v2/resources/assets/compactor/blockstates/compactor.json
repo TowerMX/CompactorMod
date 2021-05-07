@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "compactor:block/compactor"
+    },
+    "facing=east": {
+      "model": "compactor:block/compactor",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "compactor:block/compactor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "compactor:block/compactor",
+      "y": 270
+    }
+  }
+}
