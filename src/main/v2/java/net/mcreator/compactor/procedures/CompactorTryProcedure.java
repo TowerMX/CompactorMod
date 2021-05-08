@@ -1,22 +1,15 @@
 package net.mcreator.compactor.procedures;
 
-import net.minecraftforge.items.IItemHandlerModifiable;
-import net.minecraftforge.items.CapabilityItemHandler;
-
-import net.minecraft.world.IWorld;
-import net.minecraft.world.server.ServerWorld;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.ItemStack;
+import java.util.ArrayList;
 
 import net.mcreator.compactor.CompactorModElements;
-import net.mcreator.compactor.CompactorMod;
-
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.ArrayList;
-import java.util.Map;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IWorld;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 
 
@@ -76,10 +69,10 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 		for (; i < compactorInventory; i++)
 			outputStack.add(handler.getStackInSlot(i));
 
-		this.inputItem = this.inputItem(); /* FUNCIÓN DE TOWER */
-		this.outputItem = this.outputItem(); /* FUNCIÓN DE TOWER */
-		this.minimumStack = this.minimumStack(); /* FUNCIÓN DE TOWER */
-		this.addAmount = this.addAmount(); /* FUCIÓN DE TOWER */
+		this.inputItem = inputItem(); /* FUNCIÓN DE TOWER */
+		this.outputItem = outputItem(); /* FUNCIÓN DE TOWER */
+		this.minimumStack = minimumStack(); /* FUNCIÓN DE TOWER */
+		this.addAmount = addAmount(); /* FUNCIÓN DE TOWER */
 
 //		MAIN CODE
 		if (this.minimumStackAchieved())
