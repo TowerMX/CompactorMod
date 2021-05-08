@@ -18,6 +18,28 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.ArrayList;
 import java.util.Map;
 
+
+
+
+/***
+ * 
+ * El procedimiento se hace en este orden lo siguiente:
+ * 
+ *	1. Se identifica la posición del bloque y la entidad asociada a esa posición.
+ *	2. Se recoge su inventario para ser procesado.
+ *	3. Se procesa su inventario, siendo guardado lo más importante en variables dentro de la clase.
+ *	4. Se verifica que en los stacks de input (que son todos los que comprenden entre el slot 0 y 
+ *		el slot tamaño máximo de inventario - 2) haya suficientes items de los que se piden.
+ *	5. Se verifica que en los stacks de output (que son todos los que comprenden entre slot tamaño
+ *		máximo de inventario - 2 hasta el slot tamaño máximo de inventario) haya suficiente espacio
+ *		para los items requeridos.
+ *	6. Se efectúa primero el borrado de los inputs y después se introduce el output.
+ * 
+ * @author Nelnitorian
+ *
+ */
+
+
 @CompactorModElements.ModElement.Tag
 public class CompactorTryProcedure extends CompactorModElements.ModElement {
 	public CompactorTryProcedure(CompactorModElements instance) {
@@ -46,6 +68,7 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 			});
 		}
 
+		//Configuración
 		this.compactorInventory = handler.getSlots();
 		int i = 0;
 		for (; i < (compactorInventory - 2); i++)
@@ -56,13 +79,16 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 		this.inputItem = this.inputItem(); /* FUNCIÓN DE TOWER */
 		this.outputItem = this.outputItem(); /* FUNCIÓN DE TOWER */
 		this.minimumStack = this.minimumStack(); /* FUNCIÓN DE TOWER */
-		this.addAmount() = this.addAmount(); /* FUCIÓN DE TOWER */
+		this.addAmount = this.addAmount(); /* FUCIÓN DE TOWER */
 
+//		MAIN CODE
 		if (this.minimumStackAchieved())
-			if (this.itemMatches())
+			if (this.outputAvailableSpace())
 				this.effectuateOperation();
 	}
 
+	
+//	Chequea que haya suficientes items en el input 
 	public boolean minimumStackAchieved() {
 		int count = 0;
 		for (ItemStack stack : inputStack) {
@@ -72,15 +98,24 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 		return count >= this.minimumStack;
 	}
 
-//	Chequea que el item de la derecha es el que debería
-
-	private boolean itemMatches() {
-		return outputStack.getItem() == outputItem || outputStack == ItemStack.EMPTY;
+//	Chequea que haya suficiente espacio en el output
+	private boolean outputAvailableSpace() {
+		int availableSpace = 0;
+		int stackAmount;
+		int difference;
+		for (ItemStack stack : outputStack) {
+			if (stack.getItem() == outputStack) {
+				stackAmount = stack.getCount();
+				difference = stack.getMaxStackSize()-stackAmount;
+				availableSpace += difference > 0 ? difference : 0;
+			} else if(stack == ItemStack.EMPTY)
+				availableSpace += stack.getMaxStackSize();
+		}
+		return availableSpace >= addAmount;
 	}
 
 //	Efectúa la operación
 	private void effectuateOperation() {
-
 		if (handler instanceof IItemHandlerModifiable) {
 //					Shrinking amount
 			int amount = 0;
@@ -112,7 +147,7 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 				if (addable < add) {
 					stack.setCount(amount + addable);
 					add -= addable;
-				} else { // addable>add
+				} else { // addable > add
 					stack.setCount(amount + add);
 					add = 0;
 				}
