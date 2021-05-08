@@ -129,7 +129,7 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 				stack = inputStack.get(slot);
 				amount = stack.getCount();
 				if (amount < shrink) {
-					stack.setCount(0);
+					stack = ItemStack.EMPTY;
 					shrink -= amount;
 				} else { // amount > shrink
 					stack.setCount(amount - shrink);
@@ -141,6 +141,8 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 			boolean finished = false;
 			for (; slot < this.compactorInventory && add != 0; slot++) {
 				stack = outputStack.get(slot - inputStackSize);
+				if(stack==ItemStack.EMPTY)
+					stack = new ItemStack(outputItem, 0);
 				amount = stack.getCount();
 				int add = this.addAmount;
 				int addable = (stack.getMaxStackSize() - amount);
