@@ -36,7 +36,7 @@ import java.util.Map;
  *	6. Se efectúa primero el borrado de los inputs y después se introduce el output.
  * 
  * @author Nelnitorian
- *
+ *	
  */
 
 
@@ -140,7 +140,7 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 //					Now adding amount
 			boolean finished = false;
 			for (; slot < this.compactorInventory && add != 0; slot++) {
-				stack = inputStack.get(slot - inputStackSize);
+				stack = outputStack.get(slot - inputStackSize);
 				amount = stack.getCount();
 				int add = this.addAmount;
 				int addable = (stack.getMaxStackSize() - amount);
