@@ -24,6 +24,7 @@ public class CompactorFunctions {
 					|| (buttonState == 1 && (currentItem == Items.IRON_INGOT || currentItem == Items.GOLD_INGOT))
 					|| (buttonState == 2 && (currentItem == Items.IRON_NUGGET || currentItem == Items.GOLD_NUGGET))) {
 				itemType = currentItem;
+				break;
 			}
 		}
 		return itemType;
