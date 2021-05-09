@@ -136,13 +136,13 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 				((IItemHandlerModifiable) handler).setStackInSlot(slot, stack);
 			}
 //					Now adding amount
-			boolean finished = false;
+
+			int add = this.addAmount;
 			for (; slot < this.compactorInventorySize && add != 0; slot++) {
 				stack = outputStack.get(slot - inputStackSize);
 				if(stack==ItemStack.EMPTY)
 					stack = new ItemStack(outputItem, 0);
 				amount = stack.getCount();
-				int add = this.addAmount;
 				int addable = (stack.getMaxStackSize() - amount);
 				if (addable < add) {
 					stack.setCount(amount + addable);
