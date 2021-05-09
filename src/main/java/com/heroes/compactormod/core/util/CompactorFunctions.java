@@ -19,10 +19,12 @@ public class CompactorFunctions {
 
 		Item itemType = null;
 		int arraySize = itemStackArray.size();
+		
+		Item currentItem;
 
 		for (int i = 0; i < arraySize; i++) {
 
-			Item currentItem = itemStackArray.get(i).getItem();
+			currentItem = itemStackArray.get(i).getItem();
 
 			if ((buttonState == 0 && (currentItem == Items.IRON_BLOCK || currentItem == Items.GOLD_BLOCK))
 					|| (buttonState == 1 && (currentItem == Items.IRON_INGOT || currentItem == Items.GOLD_INGOT))

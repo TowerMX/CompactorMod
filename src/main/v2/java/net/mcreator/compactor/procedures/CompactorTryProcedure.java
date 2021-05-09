@@ -137,7 +137,7 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 			}
 //					Now adding amount
 			boolean finished = false;
-			for (; slot < this.compactorInventory && add != 0; slot++) {
+			for (; slot < this.compactorInventorySize && add != 0; slot++) {
 				stack = outputStack.get(slot - inputStackSize);
 				if(stack==ItemStack.EMPTY)
 					stack = new ItemStack(outputItem, 0);
