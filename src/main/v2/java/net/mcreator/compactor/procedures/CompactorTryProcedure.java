@@ -9,7 +9,9 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
+import com.heroes.compactormod.core.util.CompactorFunctions;
 
 
 
@@ -44,8 +46,11 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 	ArrayList<ItemStack> outputStack = null;
 	Item inputItem = null;
 	Item outputItem = null;
+	int inputButtonState = 0;
+	int outputButtonState = 0;
 	int compactorInventorySize = 0;
 	int minimumStack = 0;
+	int addAmount = 0;
 	IItemHandler handler = null;
 
 	public static void executeProcedure(IWorld world, int x, int y, int z) {
@@ -62,24 +67,23 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 		}
 
 		//Configuración
-		this.compactorInventory = handler.getSlots();
+		this.compactorInventorySize = handler.getSlots();
 		int i = 0;
-		for (; i < (compactorInventory - 2); i++)
-			inputStack.add(handler.getStackInSlot(i));
-		for (; i < compactorInventory; i++)
-			outputStack.add(handler.getStackInSlot(i));
+		for (; i < (this.compactorInventorySize - 2); i++)
+			this.inputStack.add(handler.getStackInSlot(i));
+		for (; i < this.compactorInventorySize; i++)
+			this.outputStack.add(handler.getStackInSlot(i));
 
-		this.inputItem = inputItem(); /* FUNCIÓN DE TOWER */
-		this.outputItem = outputItem(); /* FUNCIÓN DE TOWER */
-		this.minimumStack = minimumStack(); /* FUNCIÓN DE TOWER */
-		this.addAmount = addAmount(); /* FUNCIÓN DE TOWER */
+		this.inputItem = CompactorFunctions.ioItem(this.inputStack, this.inputButtonState); /* FUNCIÓN DE TOWER */
+		this.outputItem = CompactorFunctions.ioItem(this.outputStack, this.outputButtonState); /* FUNCIÓN DE TOWER */
+		this.minimumStack = CompactorFunctions.minimumStack(); /* FUNCIÓN DE TOWER */
+		this.addAmount = CompactorFunctions.addAmount(); /* FUNCIÓN DE TOOWER */
 
 //		MAIN CODE
 		if (this.minimumStackAchieved())
 			if (this.outputAvailableSpace())
 				this.effectuateOperation();
 	}
-
 	
 //	Chequea que haya suficientes items en el input 
 	public boolean minimumStackAchieved() {
