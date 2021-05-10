@@ -29,11 +29,8 @@ public class CompactorMod {
         ItemInit.ITEMS.register(bus);
     	BlockInit.BLOCKS.register(bus);
     	//ContainerTypesInit.CONTAINER_TYPES.register(bus);
-    	
 
-		LOGGER.debug("buenas");
-		LOGGER.debug(Items.IRON_NUGGET.getDescriptionId());
-		LOGGER.debug(Items.IRON_BLOCK.getDescriptionId());
+		//LOGGER.debug("buenas");
     	
     }
 
