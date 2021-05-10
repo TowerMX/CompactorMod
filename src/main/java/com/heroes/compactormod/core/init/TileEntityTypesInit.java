@@ -1,3 +1,4 @@
+/*
 package com.heroes.compactormod.core.init;
 
 import com.heroes.compactormod.CompactorMod;
@@ -17,3 +18,4 @@ public class TileEntityTypesInit {
 			.register("compactor", () -> TileEntityType.Builder
 					.create(CompactorTileEntity::new, BlockInit.COMPACTOR.get()).build(null));
 }
+*/

@@ -5,46 +5,65 @@ import java.util.ArrayList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.registries.ForgeRegistries;
+
+/***
+ * 
+ * Viendo que esto queda chulo yo también lo pongo 8)
+ * 
+ * En los buttonState se debe introducir un valor entre 0 y 2 que corresponde
+ * al estado del botón, que significan lo siguiente:
+ * 
+ * 0: Bloque 
+ * 1: Lingote 
+ * 2: Nugget 
+ * 
+ * Devuelve el item válido más a la izquierda, null e caso de no haber ningún
+ * item válidp
+ * 
+ * @author TowerMX
+ * 
+ */
 
 public class CompactorFunctions {
 
-	// Se debe introducir un valor entre 0 y 2 que corresponde al estado del botón
-	// 0: Bloque
-	// 1: Lingote
-	// 2: Nugget
-	// Devuelve el item válido más a la izquierda, null e caso de no haber ningún
-	// item válido
+	public static Item[] ioItem(ArrayList<ItemStack> itemStackArray, int inputButtonState, int outputButtonState) {
 
-	public static Item ioItem(ArrayList<ItemStack> itemStackArray, int buttonState) {
-
-		Item itemType = null;
-		int arraySize = itemStackArray.size();
-		
+		Item inputItem = null;
+		Item outputItem = null;
 		Item currentItem;
+		String[] buttonStatesArray = { "block", "ingot", "nugget" };
+		int arraySize = itemStackArray.size();
 
 		for (int i = 0; i < arraySize; i++) {
-
 			currentItem = itemStackArray.get(i).getItem();
-
-			if ((buttonState == 0 && (currentItem == Items.IRON_BLOCK || currentItem == Items.GOLD_BLOCK))
-					|| (buttonState == 1 && (currentItem == Items.IRON_INGOT || currentItem == Items.GOLD_INGOT))
-					|| (buttonState == 2 && (currentItem == Items.IRON_NUGGET || currentItem == Items.GOLD_NUGGET))) {
-
-				itemType = currentItem;
+			if ((inputButtonState == 0 && (currentItem == Items.IRON_BLOCK || currentItem == Items.GOLD_BLOCK))
+					|| (inputButtonState == 1 && (currentItem == Items.IRON_INGOT || currentItem == Items.GOLD_INGOT))
+					|| (inputButtonState == 2
+							&& (currentItem == Items.IRON_NUGGET || currentItem == Items.GOLD_NUGGET))) {
+				// ¡Perdón por vuestros ojos! :P
+				inputItem = currentItem;
 				break;
-
 			}
-
 		}
 
-		return itemType;
+		if (inputItem != null) {
+			outputItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(inputItem.getDescriptionId()
+					.replace(buttonStatesArray[inputButtonState], buttonStatesArray[outputButtonState])));
+		}
+
+		Item[] ioItemArray = { inputItem, outputItem };
+		return ioItemArray;
+
 	}
 
 	public static int[] stackAmounts(int inputButtonState, int outputButtonState) {
 
 		int input = inputButtonState;
 		int output = outputButtonState;
-		if (input > output) {
+
+		if (input >= output) {
 			input -= output;
 			output = 0;
 		} else {
@@ -52,11 +71,9 @@ public class CompactorFunctions {
 			input = 0;
 		}
 
-		int[] amounts = new int[2];
-		amounts[0] = 9 ^ input;
-		amounts[1] = 9 ^ output;
-
+		int[] amounts = { 9 ^ input, 9 ^ output };
 		return amounts;
+
 	}
 
 }

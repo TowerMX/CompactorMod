@@ -1,3 +1,4 @@
+/*
 package com.heroes.compactormod.container;
 
 import java.util.Objects;
@@ -84,3 +85,4 @@ public class CompactorContainer extends Container {
 	}
 
 }
+*/

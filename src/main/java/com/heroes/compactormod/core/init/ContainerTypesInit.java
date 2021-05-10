@@ -1,3 +1,4 @@
+/*
 package com.heroes.compactormod.core.init;
 
 import com.heroes.compactormod.CompactorMod;
@@ -18,3 +19,4 @@ public class ContainerTypesInit {
 			.register("compactor", () -> IForgeContainerType.create(CompactorContainer::new));
 
 }
+*/

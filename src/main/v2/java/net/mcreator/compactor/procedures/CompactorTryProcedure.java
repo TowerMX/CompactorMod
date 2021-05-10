@@ -74,8 +74,9 @@ public class CompactorTryProcedure extends CompactorModElements.ModElement {
 		for (; i < this.compactorInventorySize; i++)
 			this.outputStack.add(handler.getStackInSlot(i));
 
-		this.inputItem = CompactorFunctions.ioItem(this.inputStack, this.inputButtonState); /* FUNCIÓN DE TOWER */
-		this.outputItem = CompactorFunctions.ioItem(this.outputStack, this.outputButtonState); /* FUNCIÓN DE TOWER */
+		Item[] ioItemArray = CompactorFunctions.ioItem(this.inputStack, this.inputButtonState, this.outputButtonState); /* FUNCIÓN DE TOWER */
+		this.inputItem = ioItemArray[0];
+		this.outputItem = ioItemArray[1];
 		int[] amounts = CompactorFunctions.stackAmounts(this.inputButtonState, this.outputButtonState); /* FUNCIÓN DE TOWER */
 		this.minimumStack = amounts[0];
 		this.addAmount = amounts[1];

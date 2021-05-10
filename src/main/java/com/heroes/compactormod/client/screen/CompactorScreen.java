@@ -1,3 +1,4 @@
+/*
 package com.heroes.compactormod.client.screen;
 
 import com.heroes.compactormod.CompactorMod;
@@ -47,3 +48,4 @@ public class CompactorScreen extends ContainerScreen<CompactorContainer> {
 		
 	}
 }
+*/

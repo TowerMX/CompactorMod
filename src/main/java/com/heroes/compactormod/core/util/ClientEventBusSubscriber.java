@@ -1,3 +1,4 @@
+/*
 package com.heroes.compactormod.core.util;
 
 import com.heroes.compactormod.CompactorMod;
@@ -19,3 +20,4 @@ public class ClientEventBusSubscriber {
 		ScreenManager.register(ContainerTypesInit.COMPACTOR_CONTAINER_TYPE.get(), CompactorScreen::new);
 	}
 }
+*/

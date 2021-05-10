@@ -1,3 +1,4 @@
+/*
 package com.heroes.compactormod.common.entities;
 
 import com.heroes.compactormod.CompactorMod;
@@ -14,13 +15,15 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
-public class CompactorTileEntity extends LockableLootTileEntity /* implements ITickableTileEntity */ {
+//public class CompactorTileEntity extends LockableLootTileEntity / implements ITickableTileEntity / {
 
+	
 	/*
 	 * private static int TICKS = 100; // Cantidad de ticks a los que mirar el
 	 * inventario private int tickCounter = 1; // Contador de ticks
 	 */
-
+	
+	/*
 	public static int slots = 2;
 	protected NonNullList<ItemStack> items = NonNullList.withSize(slots, ItemStack.EMPTY);
 
@@ -56,6 +59,7 @@ public class CompactorTileEntity extends LockableLootTileEntity /* implements IT
 	protected Container createMenu(int id, PlayerInventory player) {
 		return new CompactorContainer(id, player, this);
 	}
+	*/
 
 	/*
 	 * @Override public boolean tryLoadLootTable(CompoundNBT compound) { return
@@ -82,4 +86,4 @@ public class CompactorTileEntity extends LockableLootTileEntity /* implements IT
 //	  evt.getRegistry().register(type);
 //	}
 
-}
+//}
