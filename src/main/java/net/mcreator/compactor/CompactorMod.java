@@ -42,7 +42,7 @@ import java.util.function.Supplier;
 
 @Mod(CompactorMod.MOD_ID)
 public class CompactorMod {
-	public static final String MOD_ID = "heroes_compactor_mod";
+	public static final String MOD_ID = "compactor";
 	public static final Logger LOGGER = LogManager.getLogger(CompactorMod.class);
 //	private static final String PROTOCOL_VERSION = "1";
 //	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation("compactor", "compactor"),

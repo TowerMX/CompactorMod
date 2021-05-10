@@ -1,14 +1,22 @@
-modLoader="javafml" #mandatory
-loaderVersion="[35,)" #mandatory
-license="All rights reserved" #mandatory
- 
-[[mods]] #mandatory
-modId="heroes_compactor_mod" #mandatory
-version="0.1" #mandatory
-displayName="Compactor Mod" #mandatory
-logoFile="compactormod_logo.png" #optional
-credits="Deja de leer estas cosas y juega 8)" #optional
-authors="HeRoEs" #optional
-description='''
-Po eso un bloque que compacta nuggets en lingotes y lingotes en bloques
-''' #mandatory
+modLoader="javafml"
+loaderVersion="[36,)"
+license="Academic Free License v3.0"
+
+[[mods]]
+modId="compactor"
+version="1.0.0"
+displayName="Compactor"
+credits="Created using mod maker MCreator - https://mcreator.net/about"
+displayURL="https://mcreator.net"
+authors="Usuario, MCreator"
+
+[[dependencies.compactor]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5]"
+    ordering="NONE"
+    side="BOTH"
+
+
+
+
