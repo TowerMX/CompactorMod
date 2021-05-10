@@ -32,7 +32,8 @@ public class CompactorMod {
     	
 
 		LOGGER.debug("buenas");
-		LOGGER.debug(Items.GOLD_INGOT.getDescriptionId());
+		LOGGER.debug(Items.IRON_NUGGET.getDescriptionId());
+		LOGGER.debug(Items.IRON_BLOCK.getDescriptionId());
     	
     }
 

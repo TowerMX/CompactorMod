@@ -33,7 +33,8 @@ public class CompactorFunctions {
 		Item inputItem = null;
 		Item outputItem = null;
 		Item currentItem;
-		String[] buttonStatesArray = { "block", "ingot", "nugget" };
+		String[] buttonDecoder1 = { "block.", "item.", "item." };
+		String[] buttonDecoder2 = { "block", "ingot", "nugget" };
 		int arraySize = itemStackArray.size();
 
 		for (int i = 0; i < arraySize; i++) {
@@ -50,7 +51,8 @@ public class CompactorFunctions {
 
 		if (inputItem != null) {
 			outputItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(inputItem.getDescriptionId()
-					.replace(buttonStatesArray[inputButtonState], buttonStatesArray[outputButtonState])));
+					.replace(buttonDecoder1[inputButtonState], buttonDecoder1[outputButtonState])
+					.replace(buttonDecoder2[inputButtonState], buttonDecoder2[outputButtonState])));
 		}
 
 		Item[] ioItemArray = { inputItem, outputItem };
