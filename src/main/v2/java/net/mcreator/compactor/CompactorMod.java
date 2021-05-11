@@ -57,9 +57,6 @@ public class CompactorMod {
 		bus.addListener(this::clientLoad);
 		MinecraftForge.EVENT_BUS.register(new CompactorModFMLBusEvents(this));
 		
-//		Esto lo está escribiendo: NELIO
-//		El MCREATOR hace esto, me limito a copiarlo y adaptarlo:
-		
 	}
 
 	private void init(FMLCommonSetupEvent event) {
