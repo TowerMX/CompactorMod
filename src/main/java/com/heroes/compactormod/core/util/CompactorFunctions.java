@@ -40,8 +40,8 @@ public class CompactorFunctions {
 		for (int i = 0; i < arraySize; i++) {
 			currentItem = itemStackArray.get(i).getItem();
 			currentItemDesc = currentItem.getDescriptionId();
-			if (currentItemDesc.contains("iron_" + buttonDecoder2[inputButtonState])
-					|| currentItemDesc.contains("gold_" + buttonDecoder2[inputButtonState])) {
+			if (currentItemDesc.contains(".minecraft.iron_" + buttonDecoder2[inputButtonState])
+					|| currentItemDesc.contains(".minecraft.gold_" + buttonDecoder2[inputButtonState])) {
 				// Ahora vuestros ojos no necesitan protección para ver esto 8)
 				inputItem = currentItem;
 				outputItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(
