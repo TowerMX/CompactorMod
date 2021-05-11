@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.ForgeRegistries;
 
@@ -33,26 +32,23 @@ public class CompactorFunctions {
 		Item inputItem = null;
 		Item outputItem = null;
 		Item currentItem;
+		String currentItemDesc;
 		String[] buttonDecoder1 = { "block.", "item.", "item." };
 		String[] buttonDecoder2 = { "block", "ingot", "nugget" };
 		int arraySize = itemStackArray.size();
 
 		for (int i = 0; i < arraySize; i++) {
 			currentItem = itemStackArray.get(i).getItem();
-			if ((inputButtonState == 0 && (currentItem == Items.IRON_BLOCK || currentItem == Items.GOLD_BLOCK))
-					|| (inputButtonState == 1 && (currentItem == Items.IRON_INGOT || currentItem == Items.GOLD_INGOT))
-					|| (inputButtonState == 2
-							&& (currentItem == Items.IRON_NUGGET || currentItem == Items.GOLD_NUGGET))) {
-				// ¡Perdón por vuestros ojos! :P
+			currentItemDesc = currentItem.getDescriptionId();
+			if (currentItemDesc.contains("iron_" + buttonDecoder2[inputButtonState])
+					|| currentItemDesc.contains("gold_" + buttonDecoder2[inputButtonState])) {
+				// Ahora vuestros ojos no necesitan protección para ver esto 8)
 				inputItem = currentItem;
+				outputItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(
+						currentItemDesc.replace(buttonDecoder1[inputButtonState], buttonDecoder1[outputButtonState])
+								.replace(buttonDecoder2[inputButtonState], buttonDecoder2[outputButtonState])));
 				break;
 			}
-		}
-
-		if (inputItem != null) {
-			outputItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(inputItem.getDescriptionId()
-					.replace(buttonDecoder1[inputButtonState], buttonDecoder1[outputButtonState])
-					.replace(buttonDecoder2[inputButtonState], buttonDecoder2[outputButtonState])));
 		}
 
 		Item[] ioItemArray = { inputItem, outputItem };

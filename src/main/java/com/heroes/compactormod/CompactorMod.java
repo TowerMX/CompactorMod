@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import com.heroes.compactormod.core.init.BlockInit;
 import com.heroes.compactormod.core.init.ItemInit;
 
-import net.minecraft.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
