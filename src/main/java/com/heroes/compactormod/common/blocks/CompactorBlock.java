@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.heroes.compactormod.common.procedures.CompactorTryProcedure;
+
 import io.netty.buffer.Unpooled;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
