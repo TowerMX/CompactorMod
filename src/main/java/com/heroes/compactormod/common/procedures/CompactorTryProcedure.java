@@ -40,19 +40,19 @@ public class CompactorTryProcedure {
 	
 	}
 
-	BlockPos blockPos = null;
-	ArrayList<ItemStack> inputStack = null;
-	ArrayList<ItemStack> outputStack = null;
-	Item inputItem = null;
-	Item outputItem = null;
-	int inputButtonState = 2; // Test: int del 0 al 2
-	int outputButtonState = 1; // Test: int del 0 al 2
-	int compactorInventorySize = 0;
-	int minimumStack = 0;
-	int addAmount = 0;
-	IItemHandler handler = null;
+	static BlockPos blockPos = null;
+	static ArrayList<ItemStack> inputStack = null;
+	static ArrayList<ItemStack> outputStack = null;
+	static Item inputItem = null;
+	static Item outputItem = null;
+	static int inputButtonState = 2; // Test: int del 0 al 2
+	static int outputButtonState = 1; // Test: int del 0 al 2
+	static int compactorInventorySize = 0;
+	static int minimumStack = 0;
+	static int addAmount = 0;
+	static IItemHandler handler = null;
 
-	public void executeProcedure(IWorld world, int x, int y, int z) { // Ahora el método no es static (daba errores que lo fuera) - Tower
+	public static void executeProcedure(IWorld world, int x, int y, int z) { // Ahora el método no es static (daba errores que lo fuera) - Tower
 
 		//El bloque no va a cambiar de posición
 		blockPos = new BlockPos(x, y, z);
@@ -61,43 +61,43 @@ public class CompactorTryProcedure {
 		TileEntity entity = world.getBlockEntity(blockPos);
 		if (entity != null) {
 			entity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null).ifPresent(capability -> {
-				this.handler = capability;
+				handler = capability;
 			});
 		}
 
 		//Configuración
-		this.compactorInventorySize = handler.getSlots();
+		compactorInventorySize = handler.getSlots();
 		int i = 0;
-		for (; i < (this.compactorInventorySize - 2); i++)
-			this.inputStack.add(handler.getStackInSlot(i));
-		for (; i < this.compactorInventorySize; i++)
-			this.outputStack.add(handler.getStackInSlot(i));
+		for (; i < (compactorInventorySize - 2); i++)
+			inputStack.add(handler.getStackInSlot(i));
+		for (; i < compactorInventorySize; i++)
+			outputStack.add(handler.getStackInSlot(i));
 
-		Item[] ioItemArray = CompactorFunctions.ioItem(this.inputStack, this.inputButtonState, this.outputButtonState); /* FUNCIÓN DE TOWER */
-		this.inputItem = ioItemArray[0];
-		this.outputItem = ioItemArray[1];
-		int[] amounts = CompactorFunctions.stackAmounts(this.inputButtonState, this.outputButtonState); /* FUNCIÓN DE TOWER */
-		this.minimumStack = amounts[0];
-		this.addAmount = amounts[1];
+		Item[] ioItemArray = CompactorFunctions.ioItem(inputStack, inputButtonState, outputButtonState); /* FUNCIÓN DE TOWER */
+		inputItem = ioItemArray[0];
+		outputItem = ioItemArray[1];
+		int[] amounts = CompactorFunctions.stackAmounts(inputButtonState, outputButtonState); /* FUNCIÓN DE TOWER */
+		minimumStack = amounts[0];
+		addAmount = amounts[1];
 
 //		MAIN CODE
-		if (this.minimumStackAchieved())
-			if (this.outputAvailableSpace())
-				this.effectuateOperation();
+		if (minimumStackAchieved())
+			if (outputAvailableSpace())
+				effectuateOperation();
 	}
 	
 //	Chequea que haya suficientes items en el input 
-	public boolean minimumStackAchieved() {
+	public static boolean minimumStackAchieved() {
 		int count = 0;
 		for (ItemStack stack : inputStack) {
 			if (stack.getItem() == inputItem)
 				count += stack.getCount();
 		}
-		return count >= this.minimumStack;
+		return count >= minimumStack;
 	}
 
 //	Chequea que haya suficiente espacio en el output
-	private boolean outputAvailableSpace() {
+	private static boolean outputAvailableSpace() {
 		int availableSpace = 0;
 		int stackAmount;
 		int difference;
@@ -113,7 +113,7 @@ public class CompactorTryProcedure {
 	}
 
 //	Efectúa la operación
-	private void effectuateOperation() {
+	private static void effectuateOperation() {
 		if (handler instanceof IItemHandlerModifiable) {
 //					Shrinking amount
 			int amount = 0;
@@ -121,7 +121,7 @@ public class CompactorTryProcedure {
 			ItemStack stack = null;
 
 			int inputStackSize = inputStack.size();
-			int shrink = this.minimumStack;
+			int shrink = minimumStack;
 
 			for (; slot < inputStackSize && shrink != 0; slot++) {
 				stack = inputStack.get(slot);
@@ -137,8 +137,8 @@ public class CompactorTryProcedure {
 			}
 //					Now adding amount
 
-			int add = this.addAmount;
-			for (; slot < this.compactorInventorySize && add != 0; slot++) {
+			int add = addAmount;
+			for (; slot < compactorInventorySize && add != 0; slot++) {
 				stack = outputStack.get(slot - inputStackSize);
 				if(stack==ItemStack.EMPTY)
 					stack = new ItemStack(outputItem, 0);
