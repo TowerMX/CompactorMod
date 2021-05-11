@@ -15,9 +15,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class BlockInit {
 
+	private static final String BLOCK_NAME = "compactor";
+	
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			CompactorMod.MOD_ID);
 
-	public static final RegistryObject<CompactorBlock> COMPACTOR = BLOCKS.register("compactor",
+	public static final RegistryObject<CompactorBlock> COMPACTOR = BLOCKS.register(BLOCK_NAME,
 			() -> new CompactorBlock());
 }

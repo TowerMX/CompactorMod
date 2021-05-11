@@ -35,10 +35,9 @@ import com.heroes.compactormod.core.util.CompactorFunctions;
  */
 
 
-@CompactorModElements.ModElement.Tag
-public class CompactorTryProcedure extends CompactorModElements.ModElement {
-	public CompactorTryProcedure(CompactorModElements instance) {
-		super(instance, 5);
+public class CompactorTryProcedure {
+	public CompactorTryProcedure() {
+	
 	}
 
 	BlockPos blockPos = null;

@@ -71,52 +71,43 @@ import java.util.Collections;
 
 import io.netty.buffer.Unpooled;
 
-@CompactorModElements.ModElement.Tag
-public class CompactorBlock extends CompactorModElements.ModElement {
+//@CompactorModElements.ModElement.Tag
+public class CompactorBlock extends Block/* extends CompactorModElements.ModElement */ {
 
-	public static final String BLOCK_NAME = "compactor";
-	public static final String ENTITY_NAME = "compactor";
+//	public static final String BLOCK_NAME = "compactor";
+//	public static final String ENTITY_NAME = "compactor";
 
 	@ObjectHolder("compactor:compactor")
 	public static final Block block = null;
-	@ObjectHolder("compactor:compactor")
-	public static final TileEntityType<CustomTileEntity> tileEntityType = null;
+//	@ObjectHolder("compactor:compactor")
+//	public static final TileEntityType<CompactorTileEntity> tileEntityType = null;
 
-	public CompactorBlock(CompactorModElements instance) {
-		super(instance, 2);
-		FMLJavaModLoadingContext.get().getModEventBus().register(new TileEntityRegisterHandler());
+//	public CompactorBlock(CompactorModElements instance) {
+//		super(instance, 2);
+//		FMLJavaModLoadingContext.get().getModEventBus().register(new TileEntityRegisterHandler());
+//	}
+
+//	@Override
+//	public void initElements() {
+//		elements.blocks.add(() -> new CustomBlock());
+//		elements.items.add(() -> new BlockItem(block, new Item.Properties().group(ItemGroup.REDSTONE))
+//				.setRegistryName(block.getRegistryName()));
+//	}
+
+//	public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
+
+	public CompactorBlock() {
+		super(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1f, 10f)
+				/* .strength(3.5f, 3.5f) */.harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool());
+//		this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
+//		setRegistryName(CompactorBlock.BLOCK_NAME);
 	}
 
-	@Override
-	public void initElements() {
-		elements.blocks.add(() -> new CustomBlock());
-		elements.items.add(() -> new BlockItem(block, new Item.Properties().group(ItemGroup.REDSTONE))
-				.setRegistryName(block.getRegistryName()));
-	}
-
-	private static class TileEntityRegisterHandler {
-		@SubscribeEvent
-		public void registerTileEntity(RegistryEvent.Register<TileEntityType<?>> event) {
-			event.getRegistry().register(TileEntityType.Builder.create(CustomTileEntity::new, block).build(null)
-					.setRegistryName(CompactorBlock.ENTITY_NAME));
-		}
-	}
-
-	public static class CustomBlock extends Block {
-		public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
-
-		public CustomBlock() {
-			super(Block.Properties.create(Material.ROCK).sound(SoundType.STONE).hardnessAndResistance(1f, 10f)
-					/*.strength(3.5f, 3.5f)*/.harvestLevel(0).harvestTool(ToolType.PICKAXE).setRequiresTool());
-			this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
-			setRegistryName(CompactorBlock.BLOCK_NAME);
-		}
-
-		@Override
-		protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-			builder.add(FACING);
-		}
-
+//	@Override
+//	protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+//		builder.add(FACING);
+//	}
+//
 //		public BlockState rotate(BlockState state, Rotation rot) {
 //			return state.with(FACING, rot.rotate(state.get(FACING)));
 //		}
@@ -124,88 +115,75 @@ public class CompactorBlock extends CompactorModElements.ModElement {
 //		public BlockState mirror(BlockState state, Mirror mirrorIn) {
 //			return state.rotate(mirrorIn.toRotation(state.get(FACING)));
 //		}
+//
+//	@Override
+//	public BlockState getStateForPlacement(BlockItemUseContext context) {
+//		;
+//		return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+//	}
 
-		@Override
-		public BlockState getStateForPlacement(BlockItemUseContext context) {
-			;
-			return this.getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
-		}
+	@Override
+	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
+		List<ItemStack> dropsOriginal = super.getDrops(state, builder);
+		if (!dropsOriginal.isEmpty())
+			return dropsOriginal;
+		return Collections.singletonList(new ItemStack(this, 1));
+	}
 
-		@Override
-		public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {
-			List<ItemStack> dropsOriginal = super.getDrops(state, builder);
-			if (!dropsOriginal.isEmpty())
-				return dropsOriginal;
-			return Collections.singletonList(new ItemStack(this, 1));
-		}
+	@Override
+	public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean moving) {
+		super.onBlockAdded(state, world, pos, oldState, moving);
+		world.getPendingBlockTicks().scheduleTick(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), this, 10);
+	}
 
-		@Override
-		public void onBlockAdded(BlockState state, World world, BlockPos pos, BlockState oldState, boolean moving) {
-			super.onBlockAdded(state, world, pos, oldState, moving);
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-			world.getPendingBlockTicks().scheduleTick(new BlockPos(x, y, z), this, 10);
-		}
-
-		@Override
-		public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
-			super.tick(state, world, pos, random);
-			int x = pos.getX();
-			int y = pos.getY();
-			int z = pos.getZ();
-			{
-//				Map<String, Object> dependencies = new HashMap<>();
-//				dependencies.put("x", x);
-//				dependencies.put("y", y);
-//				dependencies.put("z", z);
-//				dependencies.put("world", world);
-				CompactorTryProcedure.executeProcedure(world, x, y, z);
-			}
-			world.getPendingBlockTicks().scheduleTick(new BlockPos(x, y, z), this, 10);
-		}
+	@Override
+	public void tick(BlockState state, ServerWorld world, BlockPos pos, Random random) {
+		super.tick(state, world, pos, random);
+		CompactorTryProcedure.executeProcedure((IWorld) world, pos.getX(), pos.getY(), pos.getZ());
+		world.getPendingBlockTicks().scheduleTick(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), this, 10);
+	}
 
 //		Creo que es comentable. Creo que es de servidor y eso nosotros no lo tocamos?
 
-//		@Override
-//		public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity,
-//				Hand hand, BlockRayTraceResult hit) {
-//			super.onBlockActivated(state, world, pos, entity, hand, hit);
-//			int x = pos.getX();
-//			int y = pos.getY();
-//			int z = pos.getZ();
-//			if (entity instanceof ServerPlayerEntity) {
-//				NetworkHooks.openGui((ServerPlayerEntity) entity, new INamedContainerProvider() {
-//					@Override
-//					public ITextComponent getDisplayName() {
-//						return new StringTextComponent("Compactor");
-//					}
-//
-//					@Override
-//					public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-//						return new PrensaGui.GuiContainerMod(id, inventory,
-//								new PacketBuffer(Unpooled.buffer()).writeBlockPos(new BlockPos(x, y, z)));
-//					}
-//				}, new BlockPos(x, y, z));
-//			}
-//			return ActionResultType.SUCCESS;
-//		}
+	@Override
+	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity,
+			Hand hand, BlockRayTraceResult hit) {
+		super.onBlockActivated(state, world, pos, entity, hand, hit);
+		int x = pos.getX();
+		int y = pos.getY();
+		int z = pos.getZ();
+		if (entity instanceof ServerPlayerEntity) {
+			NetworkHooks.openGui((ServerPlayerEntity) entity, new INamedContainerProvider() {
+				@Override
+				public ITextComponent getDisplayName() {
+					return new StringTextComponent("Compactor");
+				}
 
-		@Override
-		public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-			TileEntity tileEntity = worldIn.getTileEntity(pos);
-			return tileEntity instanceof INamedContainerProvider ? (INamedContainerProvider) tileEntity : null;
+				@Override
+				public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
+					return new PrensaGui.GuiContainerMod(id, inventory,
+							new PacketBuffer(Unpooled.buffer()).writeBlockPos(new BlockPos(x, y, z)));
+				}
+			}, new BlockPos(x, y, z));
 		}
+		return ActionResultType.SUCCESS;
+	}
 
-		@Override
-		public boolean hasTileEntity(BlockState state) {
-			return true;
-		}
+	@Override
+	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		return tileEntity instanceof INamedContainerProvider ? (INamedContainerProvider) tileEntity : null;
+	}
 
-		@Override
-		public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-			return new CustomTileEntity();
-		}
+	@Override
+	public boolean hasTileEntity(BlockState state) {
+		return true;
+	}
+
+	@Override
+	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+		return new CompactorTileEntity();
+	}
 
 //		Creo que es comentable. Creo que es de servidor y eso nosotros no lo tocamos?
 
@@ -216,160 +194,29 @@ public class CompactorBlock extends CompactorModElements.ModElement {
 //			return tileentity == null ? false : tileentity.receiveClientEvent(eventID, eventParam);
 //		}
 
-		@Override
-		public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
-			if (state.getBlock() != newState.getBlock()) {
-				TileEntity tileentity = world.getTileEntity(pos);
-				if (tileentity instanceof CustomTileEntity) {
-					InventoryHelper.dropInventoryItems(world, pos, (CustomTileEntity) tileentity);
-					world.updateComparatorOutputLevel(pos, this);
-				}
-				super.onReplaced(state, world, pos, newState, isMoving);
-			}
-		}
-
-		@Override
-		public boolean hasComparatorInputOverride(BlockState state) {
-			return true;
-		}
-
-		@Override
-		public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
+	@Override
+	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+		if (state.getBlock() != newState.getBlock()) {
 			TileEntity tileentity = world.getTileEntity(pos);
-			if (tileentity instanceof CustomTileEntity)
-				return Container.calcRedstoneFromInventory((CustomTileEntity) tileentity);
-			else
-				return 0;
+			if (tileentity instanceof CompactorTileEntity) {
+				InventoryHelper.dropInventoryItems(world, pos, (CompactorTileEntity) tileentity);
+				world.updateComparatorOutputLevel(pos, this);
+			}
+			super.onReplaced(state, world, pos, newState, isMoving);
 		}
 	}
 
-	public static class CustomTileEntity extends LockableLootTileEntity implements ISidedInventory {
-		private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
+	@Override
+	public boolean hasComparatorInputOverride(BlockState state) {
+		return true;
+	}
 
-		protected CustomTileEntity() {
-			super(tileEntityType);
-		}
-
-		@Override
-		public void read(BlockState blockState, CompoundNBT compound) {
-			super.read(blockState, compound);
-			if (!this.checkLootAndRead(compound)) {
-				this.stacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
-			}
-			ItemStackHelper.loadAllItems(compound, this.stacks);
-		}
-
-		@Override
-		public CompoundNBT write(CompoundNBT compound) {
-			super.write(compound);
-			if (!this.checkLootAndWrite(compound)) {
-				ItemStackHelper.saveAllItems(compound, this.stacks);
-			}
-			return compound;
-		}
-
-//		Creo que es comentable. Creo que es de servidor y eso nosotros no lo tocamos?
-
-//		@Override
-//		public SUpdateTileEntityPacket getUpdatePacket() {
-//			return new SUpdateTileEntityPacket(this.pos, 0, this.getUpdateTag());
-//		}
-
-		@Override
-		public CompoundNBT getUpdateTag() {
-			return this.write(new CompoundNBT());
-		}
-
-//		Creo que es comentable. Creo que es de servidor y eso nosotros no lo tocamos?
-
-//		@Override
-//		public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
-//			this.read(this.getBlockState(), pkt.getNbtCompound());
-//		}
-
-		@Override
-		public int getSizeInventory() {
-			return stacks.size();
-		}
-
-		@Override
-		public boolean isEmpty() {
-			for (ItemStack itemstack : this.stacks)
-				if (!itemstack.isEmpty())
-					return false;
-			return true;
-		}
-
-		@Override
-		public ITextComponent getDefaultName() {
-			return new StringTextComponent("compactor");
-		}
-
-		@Override
-		public int getInventoryStackLimit() {
-			return 64;
-		}
-
-		@Override
-		public Container createMenu(int id, PlayerInventory player) {
-			return new PrensaGui.GuiContainerMod(id, player,
-					new PacketBuffer(Unpooled.buffer()).writeBlockPos(this.getPos()));
-		}
-
-		@Override
-		public ITextComponent getDisplayName() {
-			return new StringTextComponent("Compactor");
-		}
-
-		@Override
-		protected NonNullList<ItemStack> getItems() {
-			return this.stacks;
-		}
-
-		@Override
-		protected void setItems(NonNullList<ItemStack> stacks) {
-			this.stacks = stacks;
-		}
-
-		@Override
-		public boolean isItemValidForSlot(int index, ItemStack stack) {
-			if (index == 1)
-				return false;
-			return true;
-		}
-
-		@Override
-		public int[] getSlotsForFace(Direction side) {
-			return IntStream.range(0, this.getSizeInventory()).toArray();
-		}
-
-		@Override
-		public boolean canInsertItem(int index, ItemStack stack, @Nullable Direction direction) {
-			return this.isItemValidForSlot(index, stack);
-		}
-
-		@Override
-		public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
-			if (index == 0)
-				return false;
-			return true;
-		}
-
-		private final LazyOptional<? extends IItemHandler>[] handlers = SidedInvWrapper.create(this,
-				Direction.values());
-
-		@Override
-		public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-			if (!this.removed && facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
-				return handlers[facing.ordinal()].cast();
-			return super.getCapability(capability, facing);
-		}
-
-		@Override
-		public void remove() {
-			super.remove();
-			for (LazyOptional<? extends IItemHandler> handler : handlers)
-				handler.invalidate();
-		}
+	@Override
+	public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
+		TileEntity tileentity = world.getTileEntity(pos);
+		if (tileentity instanceof CompactorTileEntity)
+			return Container.calcRedstoneFromInventory((CompactorTileEntity) tileentity);
+		else
+			return 0;
 	}
 }

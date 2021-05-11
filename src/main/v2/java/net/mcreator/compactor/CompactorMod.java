@@ -43,19 +43,23 @@ import java.util.function.Supplier;
 @Mod(CompactorMod.MOD_ID)
 public class CompactorMod {
 	public static final String MOD_ID = "heroes_compactor_mod";
-	public static final Logger LOGGER = LogManager.getLogger(CompactorMod.class);
+//	public static final Logger LOGGER = LogManager.getLogger(CompactorMod.class);
 //	private static final String PROTOCOL_VERSION = "1";
 //	public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation("compactor", "compactor"),
 //			() -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
-	public CompactorModElements elements;
+//	public CompactorModElements elements;
 
 	public CompactorMod() {
-		elements = new CompactorModElements();
+//		elements = new CompactorModElements();
 		IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 		bus.register(this);
 		bus.addListener(this::init);
 		bus.addListener(this::clientLoad);
 		MinecraftForge.EVENT_BUS.register(new CompactorModFMLBusEvents(this));
+		
+//		Esto lo está escribiendo: NELIO
+//		El MCREATOR hace esto, me limito a copiarlo y adaptarlo:
+		
 	}
 
 	private void init(FMLCommonSetupEvent event) {

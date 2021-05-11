@@ -1,4 +1,4 @@
-/*
+
 package com.heroes.compactormod.common.entities;
 
 import com.heroes.compactormod.CompactorMod;
@@ -14,16 +14,13 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
-//public class CompactorTileEntity extends LockableLootTileEntity / implements ITickableTileEntity / {
+public class CompactorTileEntity extends LockableLootTileEntity implements ITickableTileEntity {
 
-	
-	/*
-	 * private static int TICKS = 100; // Cantidad de ticks a los que mirar el
-	 * inventario private int tickCounter = 1; // Contador de ticks
-	 */
-	
-	/*
+	private static int TICKS = 100; // Cantidad de ticks a los que mirar el inventario
+	private int tickCounter = 1; // Contador de ticks
+
 	public static int slots = 2;
 	protected NonNullList<ItemStack> items = NonNullList.withSize(slots, ItemStack.EMPTY);
 
@@ -59,31 +56,32 @@ import net.minecraft.world.World;
 	protected Container createMenu(int id, PlayerInventory player) {
 		return new CompactorContainer(id, player, this);
 	}
-	*/
 
-	/*
-	 * @Override public boolean tryLoadLootTable(CompoundNBT compound) { return
-	 * super.tryLoadLootTable(compound); }
-	 * 
-	 * @Override protected boolean trySaveLootTable(CompoundNBT compound) { return
-	 * super.trySaveLootTable(compound); }
-	 */
-	
-	/*
-	 * @Override public void tick() { if (tickCounter++ ==
-	 * CompactorTileEntity.TICKS) {
-	 * 
-	 * }
-	 * 
-	 * }
-	 */
+	@Override
+	public boolean tryLoadLootTable(CompoundNBT compound) {
+		return super.tryLoadLootTable(compound);
+	}
+
+	@Override
+	protected boolean trySaveLootTable(CompoundNBT compound) {
+		return super.trySaveLootTable(compound);
+	}
+
+	@Override
+	public void tick() {
+		if (tickCounter++ == CompactorTileEntity.TICKS) {
+
+		}
+
+	}
+
 //	Dónde se suscribe? Creo que en CompactorMod, pero no estoy seguro.
-//	
-//	@SubscribeEvent
-//	public static void registerTE(RegistryEvent.Register<TileEntityType<?>> evt) {
-//	  TileEntityType<?> type = TileEntityType.Builder.create(factory, BlockInit.BLOCKS).build(null);
-//	  type.setRegistryName("mymod", "myte");
-//	  evt.getRegistry().register(type);
-//	}
 
-//}
+	@SubscribeEvent
+	public static void registerTE(RegistryEvent.Register<TileEntityType<?>> evt) {
+		TileEntityType<?> type = TileEntityType.Builder.create(factory, BlockInit.BLOCKS).build(null);
+		type.setRegistryName("mymod", "myte");
+		evt.getRegistry().register(type);
+	}
+
+}
