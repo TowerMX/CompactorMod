@@ -20,11 +20,12 @@ public class TileEntityTypesInit {
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITY_TYPE = DeferredRegister
 			.create(ForgeRegistries.TILE_ENTITIES, CompactorMod.MOD_ID);
 
-//	public static final RegistryObject<TileEntityType<CompactorTileEntity>> COMPACTOR_TILE_ENTITY_TYPE = TILE_ENTITY_TYPE
-//			.register("compactor", () -> TileEntityType.Builder
-//					.create(CompactorTileEntity::new, BlockInit.COMPACTOR.get()).build(null));
-	
 	public static final RegistryObject<TileEntityType<CompactorTileEntity>> COMPACTOR_TILE_ENTITY_TYPE = TILE_ENTITY_TYPE
-			.register(TileEntityType.Builder.create(CompactorTileEntity::new, BlockInit.COMPACTOR.get()).build(null)
-					.setRegistryName(ENTITY_NAME));
+			.register("compactor", () -> TileEntityType.Builder
+					.of(CompactorTileEntity::new, BlockInit.COMPACTOR.get()).build(null));
+	
+//	public static final RegistryObject<TileEntityType<CompactorTileEntity>> COMPACTOR_TILE_ENTITY_TYPE = TILE_ENTITY_TYPE
+//			.register(TileEntityType.Builder.create(CompactorTileEntity::new, BlockInit.COMPACTOR.get()).build(null)
+//					.setRegistryName(ENTITY_NAME));
 }
+	

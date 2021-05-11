@@ -38,37 +38,13 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 
-public class CompactorBlock extends Block /* implements IForgeBlock */ {
+public class CompactorBlock extends Block {
 
 	public CompactorBlock() {
 		super(AbstractBlock.Properties.of(Material.STONE, MaterialColor.COLOR_BLACK).strength(3.5f, 3.5f)
 				.sound(SoundType.STONE).harvestTool(ToolType.PICKAXE).harvestLevel(0).requiresCorrectToolForDrops());
 	}
-/*
- * PRE FRANKENSTEIN
- * 
-	@Override
-	public boolean hasTileEntity(BlockState state) {
-		return true;
-	}
 
-	@Override
-	public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-		return TileEntityTypesInit.COMPACTOR_TILE_ENTITY_TYPE.get().create();
-	}
-
-	@Override
-	public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn,
-			BlockRayTraceResult hit) {
-		if (worldIn.isClientSide()) {
-			TileEntity te = worldIn.getBlockEntity(pos);
-			if (te instanceof CompactorTileEntity) {
-				NetworkHooks.openGui((ServerPlayerEntity) player, (CompactorTileEntity) te, pos);
-			}
-		}
-		return super.use(state, worldIn, pos, player, handIn, hit);
-	}
-*/
 	/* POST FRANKENSTEIN */
 	@Override
 	public List<ItemStack> getDrops(BlockState state, LootContext.Builder builder) {

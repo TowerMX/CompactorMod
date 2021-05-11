@@ -92,11 +92,11 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 		return new StringTextComponent("compactor");
 	}
 
-//	@Override
-//	public int getInventoryStackLimit() {
-//		return 64;
-//	}
-//
+	@Override
+	public int getMaxStackSize() {
+		return 64;
+	}
+
 //	/*MENU*/
 //	
 	@Override
