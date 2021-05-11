@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import com.heroes.compactormod.common.entities.CompactorTileEntity;
+import com.heroes.compactormod.common.gui.CompactorGui;
 import com.heroes.compactormod.common.procedures.CompactorTryProcedure;
 
 import io.netty.buffer.Unpooled;
@@ -75,11 +77,12 @@ public class CompactorBlock extends Block /* implements IForgeBlock */ {
 			return dropsOriginal;
 		return Collections.singletonList(new ItemStack(this, 1));
 	}
-
+	
 	@Override
-	public void onBlockAdded(World world, BlockPos pos, <T> oldState) {
-		super.onBlockAdded(world, pos, oldState);
-		world.getPendingBlockTicks().scheduleTick(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), this, 10);
+	public void onPlace(BlockState state1, World world, BlockPos pos, BlockState state2,
+			boolean flag) {
+		super.onPlace(state1, world, pos, state2, flag);
+		world.getBlockTicks().scheduleTick(new BlockPos(pos.getX(), pos.getY(), pos.getZ()), this, 10);
 	}
 
 	@Override
@@ -90,11 +93,11 @@ public class CompactorBlock extends Block /* implements IForgeBlock */ {
 	}
 
 //		Creo que es comentable. Creo que es de servidor y eso nosotros no lo tocamos?
-
+	
 	@Override
-	public ActionResultType onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity entity,
+	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity entity,
 			Hand hand, BlockRayTraceResult hit) {
-		super.onBlockActivated(state, world, pos, entity, hand, hit);
+		super.use(state, world, pos, entity, hand, hit);
 		int x = pos.getX();
 		int y = pos.getY();
 		int z = pos.getZ();
@@ -107,20 +110,18 @@ public class CompactorBlock extends Block /* implements IForgeBlock */ {
 
 				@Override
 				public Container createMenu(int id, PlayerInventory inventory, PlayerEntity player) {
-					return new PrensaGui.GuiContainerMod(id, inventory,
+					return new CompactorGui.GuiContainerMod(id, inventory,
 							new PacketBuffer(Unpooled.buffer()).writeBlockPos(new BlockPos(x, y, z)));
 				}
 			}, new BlockPos(x, y, z));
 		}
 		return ActionResultType.SUCCESS;
 	}
-
-	@Override
 	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		TileEntity tileEntity = worldIn.getBlockEntity(pos);
 		return tileEntity instanceof INamedContainerProvider ? (INamedContainerProvider) tileEntity : null;
 	}
-
+	
 	@Override
 	public boolean hasTileEntity(BlockState state) {
 		return true;
@@ -141,27 +142,25 @@ public class CompactorBlock extends Block /* implements IForgeBlock */ {
 //		}
 
 	@Override
-	public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
+	public void onRemove(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving) {
 		if (state.getBlock() != newState.getBlock()) {
-			TileEntity tileentity = world.getTileEntity(pos);
+			TileEntity tileentity = world.getBlockEntity(pos);
 			if (tileentity instanceof CompactorTileEntity) {
-				InventoryHelper.dropInventoryItems(world, pos, (CompactorTileEntity) tileentity);
-				world.updateComparatorOutputLevel(pos, this);
+				InventoryHelper.dropContents(world, pos, (CompactorTileEntity) tileentity);
+				world.updateNeighbourForOutputSignal(pos, this);
 			}
-			super.onReplaced(state, world, pos, newState, isMoving);
+			super.onRemove(state, world, pos, newState, isMoving);
 		}
 	}
-
-	@Override
+	
 	public boolean hasComparatorInputOverride(BlockState state) {
 		return true;
 	}
 
-	@Override
 	public int getComparatorInputOverride(BlockState blockState, World world, BlockPos pos) {
-		TileEntity tileentity = world.getTileEntity(pos);
+		TileEntity tileentity = world.getBlockEntity(pos);
 		if (tileentity instanceof CompactorTileEntity)
-			return Container.calcRedstoneFromInventory((CompactorTileEntity) tileentity);
+			return Container.getRedstoneSignalFromContainer((CompactorTileEntity) tileentity);
 		else
 			return 0;
 	}

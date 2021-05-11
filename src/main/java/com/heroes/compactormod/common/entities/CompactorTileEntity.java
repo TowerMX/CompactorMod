@@ -5,18 +5,15 @@ import java.util.stream.IntStream;
 
 import javax.annotation.Nullable;
 
-import com.heroes.compactormod.CompactorMod;
 //import com.heroes.compactormod.container.CompactorContainer;
 //import com.heroes.compactormod.core.init.TileEntityTypesInit;
+import com.heroes.compactormod.common.gui.CompactorGui;
 
 import io.netty.buffer.Unpooled;
-import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -24,11 +21,8 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.wrapper.SidedInvWrapper;
@@ -107,8 +101,8 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 //	
 	@Override
 	public Container createMenu(int id, PlayerInventory player) {
-		return new PrensaGui.GuiContainerMod(id, player,
-				new PacketBuffer(Unpooled.buffer()).writeBlockPos(this.getPos()));
+		return new CompactorGui.GuiContainerMod(id, player,
+				new PacketBuffer(Unpooled.buffer()).writeBlockPos(this.getBlockPos()));
 	}
 
 	@Override

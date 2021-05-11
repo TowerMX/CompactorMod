@@ -6,6 +6,8 @@ import org.apache.logging.log4j.Logger;
 import com.heroes.compactormod.core.init.BlockInit;
 import com.heroes.compactormod.core.init.ItemInit;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -28,8 +30,14 @@ public class CompactorMod {
         ItemInit.ITEMS.register(bus);
     	BlockInit.BLOCKS.register(bus);
     	//ContainerTypesInit.CONTAINER_TYPES.register(bus);
+    	
+    	ItemStack stack = new ItemStack(Items.HONEYCOMB_BLOCK, 0);
+    	LOGGER.debug(stack.isEmpty());
+    	LOGGER.debug(stack == ItemStack.EMPTY);
+    	LOGGER.debug(stack.getItem().getDescriptionId());
+    	LOGGER.debug(stack.getCount());
 
-		//LOGGER.debug("buenas");
+		LOGGER.debug("buenas");
     	
     }
 
