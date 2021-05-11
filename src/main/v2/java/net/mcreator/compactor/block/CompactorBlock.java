@@ -77,9 +77,9 @@ public class CompactorBlock extends Block/* extends CompactorModElements.ModElem
 //	public static final String BLOCK_NAME = "compactor";
 //	public static final String ENTITY_NAME = "compactor";
 
-	@ObjectHolder("compactor:compactor")
-	public static final Block block = null;
-//	@ObjectHolder("compactor:compactor")
+//	@ObjectHolder("heroes_compactor_mod:compactor")
+//	public static final Block block = null;
+//	@ObjectHolder("heroes_compactor_mod:compactor")
 //	public static final TileEntityType<CompactorTileEntity> tileEntityType = null;
 
 //	public CompactorBlock(CompactorModElements instance) {

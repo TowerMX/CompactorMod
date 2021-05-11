@@ -17,9 +17,11 @@ public class BlockInit {
 
 	private static final String BLOCK_NAME = "compactor";
 	
+	public static final CompactorBlock block = new CompactorBlock();
+	
 	public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS,
 			CompactorMod.MOD_ID);
 
 	public static final RegistryObject<CompactorBlock> COMPACTOR = BLOCKS.register(BLOCK_NAME,
-			() -> new CompactorBlock());
+			() -> block);
 }

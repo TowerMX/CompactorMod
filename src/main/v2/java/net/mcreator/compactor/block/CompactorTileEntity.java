@@ -159,4 +159,4 @@ public static class CompactorTileEntity extends LockableLootTileEntity implement
 //		event.getRegistry().register(TileEntityType.Builder.create(CustomTileEntity::new, block).build(null)
 //				.setRegistryName(CompactorBlock.ENTITY_NAME));
 //	}
-}
+//}
