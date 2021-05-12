@@ -8,11 +8,14 @@ import com.heroes.compactormod.core.init.ItemInit;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.network.NetworkRegistry;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 @Mod(CompactorMod.MOD_ID)
 public class CompactorMod {
@@ -20,6 +23,9 @@ public class CompactorMod {
 	public static final String MOD_ID = "heroes_compactor_mod";
 	
     public static final Logger LOGGER = LogManager.getLogger();
+    
+    private static final String PROTOCOL_VERSION = "1";
+    public static final SimpleChannel PACKET_HANDLER = NetworkRegistry.newSimpleChannel(new ResourceLocation("compactor", "compactor"), () -> PROTOCOL_VERSION, PROTOCOL_VERSION::equals, PROTOCOL_VERSION::equals);
 
     public CompactorMod() {
     	

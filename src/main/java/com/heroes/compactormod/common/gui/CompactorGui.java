@@ -61,7 +61,7 @@ public class CompactorGui {
 	}
 
 	public static class GuiContainerMod extends Container implements Supplier<Map<Integer, Slot>> {
-		ArrayList<ItemStack> inventorySlots = new ArrayList<ItemStack>();
+		ArrayList<Slot> inventorySlots = new ArrayList<Slot>();
 		World world;
 		PlayerEntity entity;
 		int x, y, z;
@@ -144,7 +144,7 @@ public class CompactorGui {
 					if (!this.mergeItemStack(itemstack1, 2, this.inventorySlots.size(), true)) {
 						return ItemStack.EMPTY;
 					}
-					slot.onSlotChange(itemstack1, itemstack);
+					slot.onQuickCraft(itemstack1, itemstack);;
 				} else if (!this.mergeItemStack(itemstack1, 0, 2, false)) {
 					if (index < 2 + 27) {
 						if (!this.mergeItemStack(itemstack1, 2 + 27, this.inventorySlots.size(), true)) {
@@ -186,19 +186,19 @@ public class CompactorGui {
 						break;
 					}
 					Slot slot = this.inventorySlots.get(i);
-					ItemStack itemstack = slot.getStack();
-					if (slot.isItemValid(itemstack) && !itemstack.isEmpty() && areItemsAndTagsEqual(stack, itemstack)) {
+					ItemStack itemstack = slot.getItem();
+					if (slot.mayPlace(itemstack) && !itemstack.isEmpty() && stack.areShareTagsEqual(itemstack) && stack.getItem().equals(itemstack.getItem())) {
 						int j = itemstack.getCount() + stack.getCount();
-						int maxSize = Math.min(slot.getSlotStackLimit(), stack.getMaxStackSize());
+						int maxSize = Math.min(slot.getMaxStackSize(), stack.getMaxStackSize());
 						if (j <= maxSize) {
 							stack.setCount(0);
 							itemstack.setCount(j);
-							slot.putStack(itemstack);
+							slot.set(itemstack);;
 							flag = true;
 						} else if (itemstack.getCount() < maxSize) {
 							stack.shrink(maxSize - itemstack.getCount());
 							itemstack.setCount(maxSize);
-							slot.putStack(itemstack);
+							slot.set(itemstack);
 							flag = true;
 						}
 					}
@@ -224,12 +224,12 @@ public class CompactorGui {
 						break;
 					}
 					Slot slot1 = this.inventorySlots.get(i);
-					ItemStack itemstack1 = slot1.getStack();
-					if (itemstack1.isEmpty() && slot1.isItemValid(stack)) {
-						if (stack.getCount() > slot1.getSlotStackLimit()) {
-							slot1.putStack(stack.split(slot1.getSlotStackLimit()));
+					ItemStack itemstack1 = slot1.getItem();
+					if (itemstack1.isEmpty() && slot1.mayPlace(stack)) {
+						if (stack.getCount() > slot1.getMaxStackSize()) {
+							slot1.set(stack.split(slot1.getMaxStackSize()));
 						} else {
-							slot1.putStack(stack.split(stack.getCount()));
+							slot1.set(stack.split(stack.getCount()));
 						}
 						slot1.setChanged();
 						flag = true;
@@ -245,17 +245,16 @@ public class CompactorGui {
 			return flag;
 		}
 
-		@Override
 		public void onContainerClosed(PlayerEntity playerIn) {
-			super.onContainerClosed(playerIn);
+			//super.onContainerClosed(playerIn);
 			if (!bound && (playerIn instanceof ServerPlayerEntity)) {
 				if (!playerIn.isAlive() || playerIn instanceof ServerPlayerEntity && ((ServerPlayerEntity) playerIn).hasDisconnected()) {
 					for (int j = 0; j < internal.getSlots(); ++j) {
-						playerIn.dropItem(internal.extractItem(j, internal.getStackInSlot(j).getCount(), false), false);
+						playerIn.drop(internal.extractItem(j, internal.getStackInSlot(j).getCount(), false), false);
 					}
 				} else {
 					for (int i = 0; i < internal.getSlots(); ++i) {
-						playerIn.inventory.placeItemBackInInventory(playerIn.world,
+						playerIn.inventory.placeItemBackInInventory(playerIn.level,
 								internal.extractItem(i, internal.getStackInSlot(i).getCount(), false));
 					}
 				}
@@ -263,7 +262,7 @@ public class CompactorGui {
 		}
 
 		private void slotChanged(int slotid, int ctype, int meta) {
-			if (this.world != null && this.world.isRemote()) {
+			if (this.world != null && this.world.isClientSide) {
 				CompactorMod.PACKET_HANDLER.sendToServer(new GUISlotChangedMessage(slotid, x, y, z, ctype, meta));
 				handleSlotAction(entity, slotid, ctype, meta, x, y, z);
 			}
@@ -358,16 +357,16 @@ public class CompactorGui {
 		}
 	}
 	static void handleButtonAction(PlayerEntity entity, int buttonID, int x, int y, int z) {
-		World world = entity.world;
+		World world = entity.level;
 		// security measure to prevent arbitrary chunk generation
-		if (!world.isBlockLoaded(new BlockPos(x, y, z)))
+		if (!world.isLoaded(new BlockPos(x, y, z)))
 			return;
 	}
 
 	private static void handleSlotAction(PlayerEntity entity, int slotID, int changeType, int meta, int x, int y, int z) {
-		World world = entity.world;
+		World world = entity.level;
 		// security measure to prevent arbitrary chunk generation
-		if (!world.isBlockLoaded(new BlockPos(x, y, z)))
+		if (!world.isLoaded(new BlockPos(x, y, z)))
 			return;
 	}
 }
