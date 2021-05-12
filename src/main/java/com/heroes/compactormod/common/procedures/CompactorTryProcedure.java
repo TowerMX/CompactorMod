@@ -2,6 +2,7 @@ package com.heroes.compactormod.common.procedures;
 
 import java.util.ArrayList;
 
+import com.heroes.compactormod.common.entities.CompactorTileEntity;
 import com.heroes.compactormod.core.util.CompactorFunctions;
 
 import net.minecraft.item.Item;
@@ -41,8 +42,8 @@ public class CompactorTryProcedure {
 	}
 
 	static BlockPos blockPos = null;
-	static ArrayList<ItemStack> inputStack = null;
-	static ArrayList<ItemStack> outputStack = null;
+	static ArrayList<ItemStack> inputStack = new ArrayList<>(CompactorTileEntity.INVENTORY_SIZE);
+	static ArrayList<ItemStack> outputStack = new ArrayList<>(CompactorTileEntity.INVENTORY_SIZE) ;
 	static Item inputItem = null;
 	static Item outputItem = null;
 	static int inputButtonState = 2; // Test: int del 0 al 2
@@ -68,10 +69,10 @@ public class CompactorTryProcedure {
 		//Configuración
 		compactorInventorySize = handler.getSlots();
 		int i = 0;
-		for (; i < (compactorInventorySize - 2); i++)
-			inputStack.add(handler.getStackInSlot(i));
+		for (; i < (CompactorTileEntity.INPUT_INVENTORY_SIZE); i++)
+			inputStack.set(i,handler.getStackInSlot(i));
 		for (; i < compactorInventorySize; i++)
-			outputStack.add(handler.getStackInSlot(i));
+			outputStack.set(i-CompactorTileEntity.INPUT_INVENTORY_SIZE,handler.getStackInSlot(i));
 
 		Item[] ioItemArray = CompactorFunctions.ioItem(inputStack, inputButtonState, outputButtonState); /* FUNCIÓN DE TOWER */
 		inputItem = ioItemArray[0];

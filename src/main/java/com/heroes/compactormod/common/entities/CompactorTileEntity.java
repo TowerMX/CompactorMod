@@ -29,7 +29,12 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import net.minecraftforge.registries.ObjectHolder;
 
 public class CompactorTileEntity extends LockableLootTileEntity implements ISidedInventory {
-	private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
+	
+	public static final int INVENTORY_SIZE = 4;
+	public static final int OUTPUT_INVENTORY_SIZE = 2;
+	public static final int INPUT_INVENTORY_SIZE = 2;
+	
+	private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(INVENTORY_SIZE, ItemStack.EMPTY);
 	@ObjectHolder("compactor:compactor")
 	public static final TileEntityType<CompactorTileEntity> tileEntityType = null;
 
