@@ -12,8 +12,10 @@ import com.heroes.compactormod.common.gui.CompactorGui;
 import io.netty.buffer.Unpooled;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.LockableLootTileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -42,23 +44,27 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 		super(tileEntityType);
 	}
 
-//	@Override
-//	public void read(BlockState blockState, CompoundNBT compound) {
-//		super.read(blockState, compound);
+	@Override
+	public boolean tryLoadLootTable(CompoundNBT compound) {
+		super.tryLoadLootTable(compound);
+//		boolean result = false;
 //		if (!this.checkLootAndRead(compound)) {
-//			this.stacks = NonNullList.withSize(this.getSizeInventory(), ItemStack.EMPTY);
+			this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 //		}
-//		ItemStackHelper.loadAllItems(compound, this.stacks);
-//	}
-//
-//	@Override
-//	public CompoundNBT write(CompoundNBT compound) {
-//		super.write(compound);
+		ItemStackHelper.loadAllItems(compound, this.stacks);
+		return true;
+	}
+
+	@Override
+	public boolean trySaveLootTable(CompoundNBT compound) {
+		super.trySaveLootTable(compound);
+//		boolean result = false;
 //		if (!this.checkLootAndWrite(compound)) {
-//			ItemStackHelper.saveAllItems(compound, this.stacks);
+			ItemStackHelper.saveAllItems(compound, this.stacks);
+//			result = true;
 //		}
-//		return compound;
-//	}
+		return true;
+	}
 //
 ///*		Creo que es comentable. Creo que es de servidor y eso nosotros no lo tocamos?*/
 //

@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.heroes.compactormod.core.init.BlockInit;
 import com.heroes.compactormod.core.init.ItemInit;
+import com.heroes.compactormod.core.init.TileEntityTypesInit;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -35,6 +36,7 @@ public class CompactorMod {
     	
         ItemInit.ITEMS.register(bus);
     	BlockInit.BLOCKS.register(bus);
+    	TileEntityTypesInit.TILE_ENTITY_TYPE.register(bus);
     	//ContainerTypesInit.CONTAINER_TYPES.register(bus);
     	
     	ItemStack stack = new ItemStack(Items.HONEYCOMB_BLOCK, 0);
