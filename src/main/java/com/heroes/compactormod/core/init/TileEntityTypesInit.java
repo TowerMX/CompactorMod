@@ -12,16 +12,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class TileEntityTypesInit {
-	
-	
+
 	private static final String ENTITY_NAME = "compactor_te";
 
-	private static final Block block = BlockInit.block;
-	
 	public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES = DeferredRegister
 			.create(ForgeRegistries.TILE_ENTITIES, CompactorMod.MOD_ID);
-	
-	public static final RegistryObject<TileEntityType<CompactorTileEntity>> COMPACTOR_TE = TILE_ENTITIES.register("compactor_te", TileEntityType.Builder.of(CompactorTileEntity::new, BlockInit.COMPACTOR.get()).build(null));
-	
+
+	public static final RegistryObject<TileEntityType<CompactorTileEntity>> COMPACTOR_TE = TILE_ENTITIES.register(
+			ENTITY_NAME, () -> TileEntityType.Builder.of(CompactorTileEntity::new, BlockInit.COMPACTOR.get()).build(null));
+
 }
-	

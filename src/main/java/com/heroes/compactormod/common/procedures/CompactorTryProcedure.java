@@ -42,8 +42,8 @@ public class CompactorTryProcedure {
 	}
 
 	static BlockPos blockPos = null;
-	static ArrayList<ItemStack> inputStack = new ArrayList<>(CompactorTileEntity.INVENTORY_SIZE);
-	static ArrayList<ItemStack> outputStack = new ArrayList<>(CompactorTileEntity.INVENTORY_SIZE) ;
+	static ArrayList<ItemStack> inputStack = new ArrayList<>(CompactorTileEntity.INPUT_INVENTORY_SIZE);
+	static ArrayList<ItemStack> outputStack = new ArrayList<>(CompactorTileEntity.OUTPUT_INVENTORY_SIZE);
 	static Item inputItem = null;
 	static Item outputItem = null;
 	static int inputButtonState = 2; // Test: int del 0 al 2
@@ -66,6 +66,9 @@ public class CompactorTryProcedure {
 			});
 		}
 
+//		inputStack = new ArrayList<>(CompactorTileEntity.INPUT_INVENTORY_SIZE);
+//		outputStack = new ArrayList<>(CompactorTileEntity.OUTPUT_INVENTORY_SIZE);
+		
 		//Configuración
 		compactorInventorySize = handler.getSlots();
 		int i = 0;
