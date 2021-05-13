@@ -159,19 +159,20 @@ public class CompactorTryProcedure {
 //					Now adding amount
 
 			int add = addAmount;
-			System.out.println("add = " + addAmount);
+//			System.out.println("add = " + addAmount);
 			for (int slot = inputStackSize; slot < compactorInventorySize && add != 0; slot++) {
 				stack = outputStack.get(slot - inputStackSize);
+//				System.out.println("stackItem = " + stack.getItem());
 				amount = stack.getCount();
 				if (stack == ItemStack.EMPTY || stack.getItem() == Items.AIR) {	
-					System.out.println("outputItem = " + outputItem);				
+//					System.out.println("outputItem = " + outputItem);				
 					stack = new ItemStack(outputItem, 1);
 					amount = 0;
 				}
-				if (stack.getItem() == Items.AIR)
-					System.out.println("El item del stack es AIRE");
-				else
-					System.out.println("NO ES AIRE, es:" + outputItem);
+//				if (stack.getItem() == Items.AIR)
+//					System.out.println("El item del stack es AIRE");
+//				else
+//					System.out.println("NO ES AIRE, es:" + outputItem);
 				int addable = (stack.getMaxStackSize() - amount);
 				if (addable < add) {
 					stack.setCount(amount + addable);
@@ -180,9 +181,9 @@ public class CompactorTryProcedure {
 					stack.setCount(amount + add);
 					add = 0;
 				}
-				System.out.println("stackSize = " + stack.getCount());
-				if (stack != ItemStack.EMPTY)
-					System.out.println("stackItem = " + stack.getItem());
+//				System.out.println("stackSize = " + stack.getCount());
+//				if (stack != ItemStack.EMPTY)
+//					System.out.println("stackItem = " + stack.getItem());
 				((IItemHandlerModifiable) handler).setStackInSlot(slot, stack);
 			}
 		}
