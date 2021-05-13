@@ -5,8 +5,6 @@ import java.util.stream.IntStream;
 
 import javax.annotation.Nullable;
 
-//import com.heroes.compactormod.container.CompactorContainer;
-//import com.heroes.compactormod.core.init.TileEntityTypesInit;
 import com.heroes.compactormod.common.gui.CompactorGui;
 
 import io.netty.buffer.Unpooled;
@@ -37,7 +35,8 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 	public static final int INPUT_INVENTORY_SIZE = 2;
 	
 	private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(INVENTORY_SIZE, ItemStack.EMPTY);
-	@ObjectHolder("compactor:compactor")
+	
+	@ObjectHolder("heroes_compactor_mod:compactor_te")
 	public static final TileEntityType<CompactorTileEntity> tileEntityType = null;
 
 	public CompactorTileEntity() {
