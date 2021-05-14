@@ -130,13 +130,6 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 		this.stacks = stacks;
 	}
 
-//	@Override
-	public boolean isItemValidForSlot(int index, ItemStack stack) {
-		if (index == 1)
-			return false;
-		return true;
-	}
-
 	@Override
 	public int[] getSlotsForFace(Direction side) {
 		return IntStream.range(0, this.getContainerSize()).toArray();
@@ -144,12 +137,14 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 
 	@Override
 	public boolean canPlaceItemThroughFace(int index, ItemStack stack, @Nullable Direction direction) {
-		return this.isItemValidForSlot(index, stack);
+		if (index > INPUT_INVENTORY_SIZE)
+			return false;
+		return true;
 	}
 
 	@Override
 	public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction) {
-		if (index == 0)
+		if (index <= INPUT_INVENTORY_SIZE)
 			return false;
 		return true;
 	}
