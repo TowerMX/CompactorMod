@@ -69,7 +69,7 @@ public class CompactorFunctions {
 			input = 0;
 		}
 
-		int[] amounts = { 9 ^ input, 9 ^ output };
+		int[] amounts = { (int)Math.pow(9,input), (int)Math.pow(9,output)};
 		return amounts;
 
 	}

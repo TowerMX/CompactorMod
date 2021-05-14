@@ -29,13 +29,13 @@ import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import net.minecraftforge.registries.ObjectHolder;
 
 public class CompactorTileEntity extends LockableLootTileEntity implements ISidedInventory {
-	
+
 	public static final int INVENTORY_SIZE = 4;
 	public static final int OUTPUT_INVENTORY_SIZE = 2;
 	public static final int INPUT_INVENTORY_SIZE = 2;
-	
+
 	private NonNullList<ItemStack> stacks = NonNullList.<ItemStack>withSize(INVENTORY_SIZE, ItemStack.EMPTY);
-	
+
 	@ObjectHolder("heroes_compactor_mod:compactor_te")
 	public static final TileEntityType<CompactorTileEntity> tileEntityType = null;
 
@@ -46,10 +46,7 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 	@Override
 	public boolean tryLoadLootTable(CompoundNBT compound) {
 		super.tryLoadLootTable(compound);
-//		boolean result = false;
-//		if (!this.checkLootAndRead(compound)) {
-			this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-//		}
+		this.stacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
 		ItemStackHelper.loadAllItems(compound, this.stacks);
 		return true;
 	}
@@ -57,13 +54,10 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 	@Override
 	public boolean trySaveLootTable(CompoundNBT compound) {
 		super.trySaveLootTable(compound);
-//		boolean result = false;
-//		if (!this.checkLootAndWrite(compound)) {
-			ItemStackHelper.saveAllItems(compound, this.stacks);
-//			result = true;
-//		}
+		ItemStackHelper.saveAllItems(compound, this.stacks);
 		return true;
 	}
+
 //
 ///*		Creo que es comentable. Creo que es de servidor y eso nosotros no lo tocamos?*/
 //
@@ -153,7 +147,7 @@ public class CompactorTileEntity extends LockableLootTileEntity implements ISide
 
 	@Override
 	public <T> LazyOptional<T> getCapability(Capability<T> capability, @Nullable Direction facing) {
-		if (/*!this.removed && */facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
+		if (/* !this.removed && */facing != null && capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY)
 			return handlers[facing.ordinal()].cast();
 		return super.getCapability(capability, facing);
 	}
