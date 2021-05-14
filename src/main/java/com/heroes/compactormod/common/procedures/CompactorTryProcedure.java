@@ -2,6 +2,7 @@ package com.heroes.compactormod.common.procedures;
 
 import java.util.ArrayList;
 
+import com.heroes.compactormod.CompactorMod;
 import com.heroes.compactormod.common.entities.CompactorTileEntity;
 import com.heroes.compactormod.core.util.CompactorFunctions;
 
@@ -58,8 +59,8 @@ public class CompactorTryProcedure {
 		ArrayList<ItemStack> outputStack = new ArrayList<>(CompactorTileEntity.OUTPUT_INVENTORY_SIZE);
 		Item inputItem = null;
 		Item outputItem = null;
-		int inputButtonState = 2; // Test: int del 0 al 2
-		int outputButtonState = 1; // Test: int del 0 al 2
+		int inputButtonState = 2; // NUGGETS --- Test: int del 0 al 2
+		int outputButtonState = 1; // INGOTS --- Test: int del 0 al 2
 		int compactorInventorySize = 0;
 		int minimumStack = 0;
 		int addAmount = 0;
@@ -87,10 +88,16 @@ public class CompactorTryProcedure {
 //		for (; i < compactorInventorySize; i++)
 //			outputStack.set(i-CompactorTileEntity.INPUT_INVENTORY_SIZE,handler.getStackInSlot(i));
 		int i = 0;
-		for (; i < (CompactorTileEntity.INPUT_INVENTORY_SIZE); i++)
+		for (; i < (CompactorTileEntity.INPUT_INVENTORY_SIZE); i++) {
 			inputStack.add(handler.getStackInSlot(i));
-		for (; i < compactorInventorySize; i++)
+			//CompactorMod.LOGGER.debug("buenas");
+			//CompactorMod.LOGGER.debug(inputStack.get(i).getDescriptionId());
+		}
+		for (; i < compactorInventorySize; i++) {
 			outputStack.add(handler.getStackInSlot(i));
+			//CompactorMod.LOGGER.debug("buenas2");
+			//CompactorMod.LOGGER.debug(outputStack.get(i - CompactorTileEntity.INPUT_INVENTORY_SIZE).getDescriptionId());
+		}
 
 		Item[] ioItemArray = CompactorFunctions.ioItem(inputStack, inputButtonState,
 				outputButtonState); /* FUNCIÓN DE TOWER */

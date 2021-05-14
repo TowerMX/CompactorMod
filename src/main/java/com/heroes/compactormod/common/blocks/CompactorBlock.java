@@ -93,6 +93,7 @@ public class CompactorBlock extends Block {
 		}
 		return ActionResultType.SUCCESS;
 	}
+	
 	public INamedContainerProvider getContainer(BlockState state, World worldIn, BlockPos pos) {
 		TileEntity tileEntity = worldIn.getBlockEntity(pos);
 		return tileEntity instanceof INamedContainerProvider ? (INamedContainerProvider) tileEntity : null;

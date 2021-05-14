@@ -8,7 +8,6 @@ import com.heroes.compactormod.core.init.ItemInit;
 import com.heroes.compactormod.core.init.TileEntityTypesInit;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -38,14 +37,8 @@ public class CompactorMod {
     	BlockInit.BLOCKS.register(bus);
     	TileEntityTypesInit.TILE_ENTITIES.register(bus);
     	//ContainerTypesInit.CONTAINER_TYPES.register(bus);
-    	
-    	ItemStack stack = new ItemStack(Items.HONEYCOMB_BLOCK, 0);
-    	LOGGER.debug(stack.isEmpty());
-    	LOGGER.debug(stack == ItemStack.EMPTY);
-    	LOGGER.debug(stack.getItem().getDescriptionId());
-    	LOGGER.debug(stack.getCount());
 
-		LOGGER.debug("buenas");
+		//LOGGER.debug("buenas");
     	
     }
 

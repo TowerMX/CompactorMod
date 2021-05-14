@@ -33,7 +33,7 @@ public class CompactorFunctions {
 		Item outputItem = null;
 		Item currentItem;
 		String currentItemDesc;
-		String[] buttonDecoder1 = { "block.", "item.", "item." };
+		String[] buttonDecoder1 = { "block", "item", "item" };
 		String[] buttonDecoder2 = { "block", "ingot", "nugget" };
 		int arraySize = itemStackArray.size();
 
@@ -45,7 +45,7 @@ public class CompactorFunctions {
 				// Ahora vuestros ojos no necesitan protección para ver esto 8)
 				inputItem = currentItem;
 				outputItem = ForgeRegistries.ITEMS.getValue(new ResourceLocation(
-						currentItemDesc.replace(buttonDecoder1[inputButtonState], buttonDecoder1[outputButtonState])
+						currentItemDesc.replace(buttonDecoder1[inputButtonState] + ".minecraft.", "")
 								.replace(buttonDecoder2[inputButtonState], buttonDecoder2[outputButtonState])));
 				break;
 			}

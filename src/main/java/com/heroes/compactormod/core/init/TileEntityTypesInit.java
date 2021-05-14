@@ -2,10 +2,8 @@
 package com.heroes.compactormod.core.init;
 
 import com.heroes.compactormod.CompactorMod;
-import com.heroes.compactormod.common.blocks.CompactorBlock;
 import com.heroes.compactormod.common.entities.CompactorTileEntity;
 
-import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
