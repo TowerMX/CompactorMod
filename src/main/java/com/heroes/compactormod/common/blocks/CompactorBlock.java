@@ -70,6 +70,8 @@ public class CompactorBlock extends Block {
 
 //		Creo que es comentable. Creo que es de servidor y eso nosotros no lo tocamos?
 	
+//	Check https://github.com/TheGreyGhost/MinecraftByExample/tree/1-15-2-final/src/main/java/minecraftbyexample/mbe31_inventory_furnace
+	
 	@Override
 	public ActionResultType use(BlockState state, World world, BlockPos pos, PlayerEntity entity,
 			Hand hand, BlockRayTraceResult hit) {
