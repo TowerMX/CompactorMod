@@ -47,7 +47,7 @@ public class CompactorGui {
 	private static class ContainerRegisterHandler {
 		@SubscribeEvent
 		public void registerContainer(RegistryEvent.Register<ContainerType<?>> event) {
-			event.getRegistry().register(containerType.setRegistryName("prensa"));
+			event.getRegistry().register(containerType.setRegistryName("compactor_gui"));
 		}
 	}
 	@OnlyIn(Dist.CLIENT)

@@ -1,6 +1,7 @@
 
 package com.heroes.compactormod.common.gui;
 
+import com.heroes.compactormod.CompactorMod;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 
@@ -29,7 +30,7 @@ public class CompactorGuiWindow extends ContainerScreen<CompactorGui.GuiContaine
 		this.imageWidth = 176;
 		this.imageHeight = 166;
 	}
-	private static final ResourceLocation texture = new ResourceLocation("compactor:textures/prensa.png");
+	private static final ResourceLocation texture = new ResourceLocation(CompactorMod.MOD_ID + ":textures/gui/compactor.png"); // heroes_compactor_mod:textures/gui/compactor.png
 	@Override
 	public void render(MatrixStack ms, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(ms);
